@@ -16,6 +16,20 @@
 			<ValidationMessage For="@(() => medio.Email)" />
 		</div>
 	</div>
+	<div class="col-lg-12">
+		<div class="mb-3">
+			<label class="from-label">Telefono</label>
+			<InputText id="Telefono" class="from-control" @bind-Value="@medio.Telefono" />
+			<ValidationMessage For="@(() => medio.Telefono)" />
+		</div>
+	</div>
+	<div class="col-lg-12">
+		<div class="mb-3">
+			<label class="from-label">Celular</label>
+			<InputText id="Celular" class="from-control" @bind-Value="@medio.Celular" />
+			<ValidationMessage For="@(() => medio.Celular)" />
+		</div>
+	</div>
 
 	<div class="col-lg-12 text-end mb-3 pt-4">
 		<hr />

@@ -57,7 +57,7 @@ namespace BlazorContactos.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add([FromBody] MedioContactoDTO  medioDto)
+        public async Task<ActionResult<int>> Add([FromBody] MedioContactoDTO  medioDto)
         {
             var medio = new MediosContacto();
             medio.Id = medioDto.Id;
