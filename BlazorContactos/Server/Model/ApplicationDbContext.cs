@@ -22,5 +22,6 @@ namespace BlazorContactos.Server.Model
 
         public DbSet<Contacto> Contactos { get; set; }
         public DbSet<MediosContacto> Medios { get; set; }
+        public DbSet<Pais> Paises { get; set; }
     }
 }

@@ -58,7 +58,7 @@ else
 
 	protected override async Task OnInitializedAsync()
 	{
-		var response = await http.GetFromJsonAsync<List<MedioContactoDTO>>("api/medios");
+		var response = await http.GetFromJsonAsync<List<MedioContactoDTO>>("api/medioz");
 		if (response != null)
 		{
 			medios = response;
@@ -67,7 +67,7 @@ else
 
 	protected async Task Eliminar(MedioContactoDTO medio)
 	{
-		await http.DeleteAsync($"api/medios/{medio.Id}");
+		await http.DeleteAsync($"api/medioz/{medio.Id}");
 		medios.Remove(medio);
 	}
 }

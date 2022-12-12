@@ -1,11 +1,12 @@
 ﻿using BlazorContactos.Server.Model;
+using BlazorContactos.Server.Model.Entities;
 using BlazorContactos.Shared.DTOs.Contactos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorContactos.Server.Controllers
 {
-    [ApiController, Route("api/contactos")]
+    [ApiController, Route("api/contactoz")]
     public class ContactosController : ControllerBase
     {
        
@@ -19,7 +20,7 @@ namespace BlazorContactos.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ContactoDTO>>> GetContactos()
         {
-            var contactos = await context.Contactos.ToListAsync();
+            var contactos = await context.Contactos.Include(m => m.Medios).ToListAsync();
 
             var contactosDto = new List<ContactoDTO>();
 
@@ -38,8 +39,6 @@ namespace BlazorContactos.Server.Controllers
         {
             var contacto = await context.Contactos.FirstOrDefaultAsync(x => x.Id == id);
 
-            context.Contactos.Include(m => m.Medios).ToList();
-
             if (contacto == null)
             {
                 return NotFound();
@@ -47,12 +46,25 @@ namespace BlazorContactos.Server.Controllers
 
             var contactoDto = new ContactoDTO();
             contactoDto.Id = contacto.Id;
-            contacto.Nombre = contacto.Nombre;
+            contactoDto.Nombre = contacto.Nombre;
 
             return contactoDto;
         }
 
         [HttpPost]
+        public async Task<ActionResult> Add([FromBody] ContactoDTO contactoDto)
+        {
+            var contacto = new Contacto();
+            contacto.Id = contactoDto.Id;
+            contacto.Nombre = contactoDto.Nombre;
+
+
+            context.Contactos.Add(contacto);
+            await context.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpPut]
 
         public async Task<ActionResult> Edit([FromBody] ContactoDTO contactoDto)
         {

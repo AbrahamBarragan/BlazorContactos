@@ -33,7 +33,7 @@
 	{
 		if (id > 0)
 		{
-			var response = await http.GetFromJsonAsync<MedioContactoDTO>($"api/medios/{id}");
+			var response = await http.GetFromJsonAsync<MedioContactoDTO>($"api/medioz/{id}");
 			if (response != null)
 			{
 				medio = response;
@@ -45,11 +45,11 @@
 	{
 		if (id > 0)
 		{
-			await http.PutAsJsonAsync<MedioContactoDTO>("api/medios", medio);
+			await http.PutAsJsonAsync<MedioContactoDTO>("api/medioz", medio);
 		}
 		else
 		{
-			await http.PostAsJsonAsync<MedioContactoDTO>("api/medios", medio);
+			await http.PostAsJsonAsync<MedioContactoDTO>("api/medioz", medio);
 		}
 		navigationManager.NavigateTo("medios");
 	}

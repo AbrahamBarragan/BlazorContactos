@@ -10,10 +10,12 @@ namespace BlazorContactos.Server.Model.Entities
         public string Email { get; set; }
 
         public string Telefono { get; set; }
-        
+
         public string Celular { get; set; }
 
-        
+        public List<Pais> Paises { get; set; }
+
+
         public int ContactoId { get; set; }
         public Contacto Contacto { get;set; }
     }

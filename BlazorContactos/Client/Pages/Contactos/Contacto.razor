@@ -14,6 +14,33 @@
 			<label class="from-label">Nombre</label>
 			<InputText id="Nombre" class="from-control" @bind-Value="@contacto.Nombre"/>
 			<ValidationMessage For="@(() => contacto.Nombre)"/>
+
+			<div class="form-group">
+				<button type="button" class="btn btn-secondary" @onclick="@(() => contacto.Medios.Add(new MedioContactoDTO()))">Agregar Medios</button>
+			</div>
+
+			@for (var i = 0; i < contacto.Medios.Count; i++)
+			{
+				var indice = i;
+				var medio = contacto.Medios[i];
+
+				<h5>Contacto</h5>
+
+				<div class="form-group">
+					<label>Email:</label>
+					<InputText class="form-control" @bind-Value="medio.Email"/>
+				</div>
+				<div class="form-group">
+					<label>Telefono:</label>
+					<InputText class="form-control" @bind-Value="medio.Telefono"/>
+				</div>
+				<div class="form-group">
+					<label>Celular:</label>
+					<InputText class="form-control" @bind-Value="medio.Celular" />
+				</div>
+
+				<button type="button" class="btn btn-danger" @onclick="@(() => contacto.Medios.RemoveAt(indice))">Remover</button>
+			}
 		</div>
 	</div>
 
@@ -34,7 +61,7 @@
 	{
 		if (id > 0)
 		{
-			var response = await http.GetFromJsonAsync<ContactoDTO>($"api/contactos/{id}");
+			var response = await http.GetFromJsonAsync<ContactoDTO>($"api/contactoz/{id}");
 			if (response != null)
 			{
 				contacto = response;
@@ -46,11 +73,11 @@
 	{
 		if (id > 0)
 		{
-			await http.PutAsJsonAsync<ContactoDTO>("api/contactos", contacto);
+			await http.PutAsJsonAsync<ContactoDTO>("api/contactoz", contacto);
 		}
 		else
 		{
-			await http.PostAsJsonAsync<ContactoDTO>("api/contactos", contacto);
+			await http.PostAsJsonAsync<ContactoDTO>("api/contactoz", contacto);
 		}
 		navigationManager.NavigateTo("contactos");
 	}
