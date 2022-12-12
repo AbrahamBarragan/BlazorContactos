@@ -9,5 +9,6 @@ namespace BlazorContactos.Shared.DTOs.Contactos
         [Required(ErrorMessage = "El campo {0} es requerido")]
         public string Nombre { get; set; }
 
+        
     }
 }
